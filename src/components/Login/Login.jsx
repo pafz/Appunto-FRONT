@@ -1,38 +1,29 @@
 import React, { useState } from 'react';
-import { login, register } from '../../features/auth/authSlice';
 import { useDispatch } from 'react-redux';
+import { login } from '../../features/auth/authSlice';
 
-const Register = () => {
+const Login = () => {
   const [formData, setFormData] = useState({
-    name: '',
     email: '',
     password: '',
-    password2: '',
   });
-  const { name, email, password, password2 } = formData;
+  const { email, password } = formData;
+
+  const dispatch = useDispatch();
+
   const onChange = e => {
     setFormData(prevState => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
   };
-
-  const dispatch = useDispatch();
-
   const onSubmit = e => {
     e.preventDefault();
-    if (password !== password2) {
-      return notification.error({
-        message: 'Error',
-        description: 'Passwords do not match',
-      });
-    } else {
-      return dispatch(register(formData));
-    }
+    dispatch(login(formData));
   };
+
   return (
     <form onSubmit={onSubmit}>
-      <input type="text" name="name" value={name} onChange={onChange} />
       <input type="email" name="email" value={email} onChange={onChange} />
       <input
         type="password"
@@ -40,14 +31,8 @@ const Register = () => {
         value={password}
         onChange={onChange}
       />
-      <input
-        type="password"
-        name="password2"
-        value={password2}
-        onChange={onChange}
-      />
-      <button type="submit">Register</button>
+      <button type="submit">Login</button>
     </form>
   );
 };
-export default Register;
+export default Login;
