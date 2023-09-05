@@ -8,7 +8,7 @@ const Register = () => {
     email: '',
     password: '',
   });
-  const { name, email, password } = formData;
+  const { name, email, password, password2 } = formData;
 
   const dispatch = useDispatch();
 
@@ -24,12 +24,32 @@ const Register = () => {
   };
   return (
     <form onSubmit={onSubmit}>
-      <input type="text" name="name" value={name} onChange={onChange} />
-      <input type="email" name="email" value={email} onChange={onChange} />
+      <input
+        type="text"
+        name="name"
+        placeholder="name"
+        value={name}
+        onChange={onChange}
+      />
+      <input
+        type="email"
+        name="email"
+        placeholder="email"
+        value={email}
+        onChange={onChange}
+      />
       <input
         type="password"
         name="password"
+        placeholder="password"
         value={password}
+        onChange={onChange}
+      />
+      <input
+        type="password"
+        name="password2"
+        placeholder="password"
+        value={password2}
         onChange={onChange}
       />
       <button type="submit">Register</button>
