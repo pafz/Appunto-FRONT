@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { createDoubt } from "./doubtSlice";
-import { notification } from "antd";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useToast } from "@chakra-ui/react";
 
-const CreateDoubtComponent = () => {
+const Doubts = () => {
     const [formData, setFormData] = useState({
         topic: "",
         question: "",
@@ -12,20 +11,28 @@ const CreateDoubtComponent = () => {
     const { topic, question } = formData;
     const { message, isSuccess, isError } = useSelector((state) => state.doubt);
     const dispatch = useDispatch();
+    const toast = useToast();
 
     useEffect(() => {
         if (isSuccess) {
-            notification.success({
-                message: message,
+            toast({
+                title: "Éxito",
+                description: message,
+                status: "success",
+                duration: 3000,
+                isClosable: true,
             });
-            // Puedes redirigir o hacer algo después del éxito si es necesario
         }
         if (isError) {
-            notification.error({
-                message: message,
+            toast({
+                title: "Error",
+                description: message,
+                status: "error",
+                duration: 3000,
+                isClosable: true,
             });
         }
-    }, [message, isSuccess, isError]);
+    }, [message, isSuccess, isError, toast]);
 
     const onChange = (e) => {
         setFormData((prevState) => ({
@@ -54,4 +61,4 @@ const CreateDoubtComponent = () => {
     );
 };
 
-export default CreateDoubtComponent;
+export default Doubts;

@@ -1,5 +1,3 @@
-// doubtSlice.js
-
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import doubtService from "./doubtService";
 import { selectAuthUser } from "../auth/authSlice";
