@@ -9,25 +9,30 @@ const Header = () => {
   const { user } = useSelector(state => state.auth);
 
   return (
-    <>
-      <nav>
-        <span>header</span>
-        <div>
-          {user ? (
-            <button onClick={() => dispatch(logout())}>Logout</button>
-          ) : (
-            <>
-              <span>
-                <Link to="/login">Login</Link>
-              </span>
-              <span>
-                <Link to="/register">Register</Link>
-              </span>
-            </>
-          )}
-        </div>
-      </nav>
-    </>
+    <nav>
+      <span>header</span>
+      <span>
+        <Link to="/">Home </Link>
+      </span>
+
+      {user ? (
+        <>
+          <button onClick={() => dispatch(logout())}>Logout</button>
+          <span>
+            <Link to="/profile">{user.name}</Link>
+          </span>
+        </>
+      ) : (
+        <>
+          <span>
+            <Link to="/login">Login</Link>
+          </span>
+          <span>
+            <Link to="/register">Register</Link>
+          </span>
+        </>
+      )}
+    </nav>
   );
 };
 
