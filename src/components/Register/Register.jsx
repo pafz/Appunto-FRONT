@@ -48,7 +48,7 @@ const Register = () => {
     } else {
       dispatch(register(formData));
       setTimeout(() => {
-        navigate('/');
+        navigate('/register');
       }, 3000);
     }
   };
