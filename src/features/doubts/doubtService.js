@@ -13,13 +13,23 @@ const getAll = async () => {
 };
 
 const getById = async (id) => {
-    const res = await axios.get(API_URL + "/doubts/" + id);
+    const res = await axios.get(API_URL + "/doubts/" + id, { headers: { Authorization: token } });
     return res.data;
 };
 
 const getByTopic = async (topic) => {
-    const res = await axios.get(API_URL + "/doubts/topic/" + topic);
+    const res = await axios.get(API_URL + "/doubts/topic/" + topic, { headers: { Authorization: token } });
     return res.data;
+};
+
+const deleteDoubt = async (id) => {
+    const token = JSON.parse(localStorage.getItem("token"));
+    await axios.delete(API_URL + "/doubts/doubts" + id, {
+        headers: {
+            Authorization: token,
+        },
+    });
+    return id;
 };
 
 const doubtService = {
@@ -27,6 +37,7 @@ const doubtService = {
     getAll,
     getById,
     getByTopic,
+    deleteDoubt,
 };
 
 export default doubtService;

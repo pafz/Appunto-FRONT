@@ -7,6 +7,14 @@ const initialState = {
     doubt: {},
 };
 
+export const createDoubt = createAsyncThunk("doubts/createDoubt", async (doubtData) => {
+    try {
+        return await doubtService.createDoubt(doubtData);
+    } catch (error) {
+        console.error(error);
+    }
+});
+
 export const getAll = createAsyncThunk("doubts/getAll", async () => {
     try {
         return await doubtService.getAll();
@@ -24,7 +32,15 @@ export const getById = createAsyncThunk("doubts/getById", async (id) => {
 
 export const getByTopic = createAsyncThunk("doubts/getByTopic", async (topic) => {
     try {
-        return await doubtService.getByName(topic);
+        return await doubtService.getByTopic(topic);
+    } catch (error) {
+        console.error(error);
+    }
+});
+
+export const deleteDoubt = createAsyncThunk("doubts/deleteDoubt", async (id) => {
+    try {
+        return await doubtService.deleteDoubt(id);
     } catch (error) {
         console.error(error);
     }
@@ -40,15 +56,21 @@ export const doubtsSlice = createSlice({
                 state.doubts = action.payload.doubts;
                 state.isLoading = false;
             })
-            .addCase(getAll.pending, (state, action) => {
+            .addCase(getAll.pending, (state) => {
                 state.isLoading = true;
             })
             .addCase(getById.fulfilled, (state, action) => {
                 state.doubt = action.payload;
                 state.isLoading = false;
             })
+            .addCase(getById.pending, (state) => {
+                state.isLoading = true;
+            })
             .addCase(getByTopic.fulfilled, (state, action) => {
-                state.posts = action.payload;
+                state.doubts = action.payload;
+            })
+            .addCase(deleteDoubt.fulfilled, (state, action) => {
+                state.doubts = state.doubts.filter((doubt) => doubt.id != action.payload);
             });
     },
 });

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useToast } from "@chakra-ui/react";
+import SingleDoubt from "../SingleDoubt/SingleDoubt";
+import { createDoubt } from "../../features/doubts/doubtsSlice";
 
 const Doubts = () => {
     const [formData, setFormData] = useState({
@@ -10,6 +12,7 @@ const Doubts = () => {
 
     const dispatch = useDispatch();
     const toast = useToast();
+    const { isSuccess, isError, message } = useSelector((state) => state.doubts);
 
     useEffect(() => {
         if (isSuccess) {
@@ -44,15 +47,28 @@ const Doubts = () => {
 
         dispatch(
             createDoubt({
-                topic,
-                question,
+                topic: formData.topic,
+                question: formData.question,
             })
         );
+
+        setFormData({ topic: "", question: "" });
     };
 
     return (
         <div>
-            Posts
+            <h2>Cargar una Duda</h2>
+            <form onSubmit={onSubmit}>
+                <div>
+                    <label htmlFor="topic">Tema:</label>
+                    <input type="text" name="topic" value={formData.topic} onChange={onChange} />
+                </div>
+                <div>
+                    <label htmlFor="question">Pregunta:</label>
+                    <textarea name="question" value={formData.question} onChange={onChange} />
+                </div>
+                <button type="submit">Enviar</button>
+            </form>
             <SingleDoubt />
         </div>
     );
