@@ -8,7 +8,6 @@ const Doubts = () => {
         question: "",
     });
 
-const Doubts = () => {
     const dispatch = useDispatch();
     const toast = useToast();
 

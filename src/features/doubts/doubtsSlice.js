@@ -38,7 +38,6 @@ export const doubtsSlice = createSlice({
         builder
             .addCase(getAll.fulfilled, (state, action) => {
                 state.doubts = action.payload.doubts;
-                console.log(action.payload.doubts);
                 state.isLoading = false;
             })
             .addCase(getAll.pending, (state, action) => {
@@ -48,11 +47,8 @@ export const doubtsSlice = createSlice({
                 state.doubt = action.payload;
                 state.isLoading = false;
             })
-            .addCase(getById.pending, (state) => {
-                state.isLoading = true;
-            })
             .addCase(getByTopic.fulfilled, (state, action) => {
-                state.doubts = action.payload;
+                state.posts = action.payload;
             });
     },
 });
