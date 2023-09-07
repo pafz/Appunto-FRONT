@@ -10,14 +10,13 @@ const Header = () => {
 
   return (
     <nav>
-      <span>header</span>
       <span>
         <Link to="/">Home </Link>
       </span>
 
       {user ? (
         <>
-          <button onClick={() => dispatch(logout())}>Logout</button>
+          <button onClick={() => dispatch(logout())}>Logout </button>
           <span>
             <Link to="/profile">{user.name}</Link>
           </span>
@@ -25,10 +24,10 @@ const Header = () => {
       ) : (
         <>
           <span>
-            <Link to="/login">Login</Link>
+            <Link to="/login">Login </Link>
           </span>
           <span>
-            <Link to="/register">Register</Link>
+            <Link to="/register">Register </Link>
           </span>
         </>
       )}

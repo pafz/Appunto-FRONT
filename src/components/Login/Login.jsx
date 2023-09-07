@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from '../../features/auth/authSlice';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +11,7 @@ const Login = () => {
   const { email, password } = formData;
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onChange = e => {
     setFormData(prevState => ({
@@ -20,6 +22,7 @@ const Login = () => {
   const onSubmit = e => {
     e.preventDefault();
     dispatch(login(formData));
+    navigate('/');
   };
 
   return (
