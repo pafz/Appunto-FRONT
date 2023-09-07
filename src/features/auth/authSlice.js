@@ -24,21 +24,17 @@ export const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         //action.payload = res.data (authService)
         state.user = action.payload.user;
-<<<<<<< HEAD
         state.token = action.payload.message;
         state.isSuccess = true;
       })
       .addCase(login.rejected, (state, action) => {
         state.isError = true;
         state.message = action.payload;
-=======
         state.token = action.payload.token;
->>>>>>> ab88ecb (login DONE)
       })
       .addCase(logout.fulfilled, state => {
         state.user = null;
         state.token = null;
-<<<<<<< HEAD
       })
       .addCase(register.fulfilled, (state, action) => {
         state.isSuccess = true;
@@ -47,8 +43,6 @@ export const authSlice = createSlice({
       .addCase(register.rejected, (state, action) => {
         state.isError = true;
         state.message = action.payload.message;
-=======
->>>>>>> ab88ecb (login DONE)
       });
   },
 });
@@ -79,17 +73,6 @@ export const logout = createAsyncThunk('auth/logout', async () => {
   }
 });
 
-<<<<<<< HEAD
 export const { reset } = authSlice.actions;
 
-=======
-export const logout = createAsyncThunk('auth/logout', async () => {
-  try {
-    return await authService.logout();
-  } catch (error) {
-    console.error(error);
-  }
-});
-export const { reset } = authSlice.actions;
->>>>>>> ab88ecb (login DONE)
 export default authSlice.reducer;
