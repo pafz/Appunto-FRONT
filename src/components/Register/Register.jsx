@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { register, reset } from '../../features/auth/authSlice';
 import { notification } from 'antd';
+//import useToast
 import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
@@ -20,6 +21,7 @@ const Register = () => {
 
   useEffect(() => {
     if (isSuccess) {
+      //copy toast from doubts
       notification.success({
         message: message,
       });
