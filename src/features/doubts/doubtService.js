@@ -1,14 +1,14 @@
-import axios from "axios";
+import axios from 'axios';
 
-const API_URL = "http://localhost:3001";
+const API_URL = 'http://localhost:3001';
 
-const createDoubt = async (doubtData) => {
-    const res = await axios.post(`${API_URL}/doubts`, doubtData);
-    return res.data;
+const createDoubt = async doubtData => {
+  const res = await axios.post(`${API_URL}/doubts`, doubtData);
+  return res.data;
 };
 
 const doubtService = {
-    createDoubt,
+  createDoubt,
 };
 
 export default doubtService;
