@@ -1,7 +1,8 @@
 import React from "react";
+
 import { useDispatch, useSelector } from "react-redux";
-import { FaTrash } from "react-icons/fa";
-import { deletePost } from "../../features/posts/postsSlice";
+import { FaTrashAlt } from "react-icons/fa";
+import { deleteDoubt } from "../../features/doubts/doubtsSlice";
 
 const TeacherDoubts = () => {
     const { doubts } = useSelector((state) => state.doubts);
@@ -16,10 +17,10 @@ const TeacherDoubts = () => {
                         <span>{doubt.question}</span>
                         <span
                             onClick={async () => {
-                                dispatch(deletePost(doubt.id));
+                                dispatch(deleteDoubt(doubt.id));
                             }}
                         >
-                            <FaTrash />
+                            <FaTrashAlt />
                         </span>
                     </div>
                 );

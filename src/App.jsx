@@ -9,6 +9,7 @@ import Profile from "./components/Profile/Profile";
 import Doubts from "./components/Doubts/Doubts";
 import TeacherZone from "./guards/TeacherZone";
 import Teacher from "./components/Teacher/Teacher";
+import PrivateZone from "./guards/PrivateZone";
 
 function App() {
     return (
