@@ -1,31 +1,39 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createDoubt } from "./doubtSlice";
-import { notification } from "antd";
+import { useToast } from "@chakra-ui/react";
+import SingleDoubt from "../SingleDoubt/SingleDoubt";
+import { createDoubt } from "../../features/doubts/doubtsSlice";
 
-const CreateDoubtComponent = () => {
+const Doubts = () => {
     const [formData, setFormData] = useState({
         topic: "",
         question: "",
     });
 
-    const { topic, question } = formData;
-    const { message, isSuccess, isError } = useSelector((state) => state.doubt);
     const dispatch = useDispatch();
+    const toast = useToast();
+    const { isSuccess, isError, message } = useSelector((state) => state.doubts);
 
     useEffect(() => {
         if (isSuccess) {
-            notification.success({
-                message: message,
+            toast({
+                title: "Éxito",
+                description: message,
+                status: "success",
+                duration: 3000,
+                isClosable: true,
             });
-            // Puedes redirigir o hacer algo después del éxito si es necesario
         }
         if (isError) {
-            notification.error({
-                message: message,
+            toast({
+                title: "Error",
+                description: message,
+                status: "error",
+                duration: 3000,
+                isClosable: true,
             });
         }
-    }, [message, isSuccess, isError]);
+    }, [message, isSuccess, isError, toast]);
 
     const onChange = (e) => {
         setFormData((prevState) => ({
@@ -39,19 +47,31 @@ const CreateDoubtComponent = () => {
 
         dispatch(
             createDoubt({
-                topic,
-                question,
+                topic: formData.topic,
+                question: formData.question,
             })
         );
+
+        setFormData({ topic: "", question: "" });
     };
 
     return (
-        <form onSubmit={onSubmit}>
-            <input type="text" name="topic" value={topic} onChange={onChange} placeholder="Tema" />
-            <input type="text" name="question" value={question} onChange={onChange} placeholder="Pregunta" />
-            <button type="submit">Crear Duda</button>
-        </form>
+        <div>
+            <h2>Cargar una Duda</h2>
+            <form onSubmit={onSubmit}>
+                <div>
+                    <label htmlFor="topic">Tema:</label>
+                    <input type="text" name="topic" value={formData.topic} onChange={onChange} />
+                </div>
+                <div>
+                    <label htmlFor="question">Pregunta:</label>
+                    <textarea name="question" value={formData.question} onChange={onChange} />
+                </div>
+                <button type="submit">Enviar</button>
+            </form>
+            <SingleDoubt />
+        </div>
     );
 };
 
-export default CreateDoubtComponent;
+export default Doubts;

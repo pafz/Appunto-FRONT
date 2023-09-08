@@ -6,7 +6,10 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './components/Home/Home';
 import Header from './components/Header/Header';
 import Profile from './components/Profile/Profile';
-import Answers from './components/Answers/Answers';
+import Doubts from './components/Doubts/Doubts';
+import TeacherZone from './guards/TeacherZone';
+import Teacher from './components/Teacher/Teacher';
+import PrivateZone from './guards/PrivateZone';
 
 function App() {
   return (
@@ -15,14 +18,28 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route
+            path="/profile"
+            element={
+              <PrivateZone>
+                <Profile />
+              </PrivateZone>
+            }
+          />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/answers" element={<Answers />} />
+          <Route path="/doubts" element={<Doubts />} />
+          <Route
+            path="/teacher"
+            element={
+              <TeacherZone>
+                <Teacher />
+              </TeacherZone>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </div>
   );
 }
-
 export default App;
