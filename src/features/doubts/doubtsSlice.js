@@ -52,6 +52,11 @@ export const doubtsSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
+
+            .addCase(createDoubt.fulfilled, (state, action) => {
+                state.doubts = action.payload.doubts;
+                state.isLoading = false;
+            })
             .addCase(getAll.fulfilled, (state, action) => {
                 state.doubts = action.payload.doubts;
                 state.isLoading = false;

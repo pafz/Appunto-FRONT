@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useToast } from "@chakra-ui/react";
+import { Card, Grid, Text, useToast } from "@chakra-ui/react";
 import SingleDoubt from "../SingleDoubt/SingleDoubt";
 import { createDoubt } from "../../features/doubts/doubtsSlice";
 
@@ -56,21 +56,25 @@ const Doubts = () => {
     };
 
     return (
-        <div>
-            <h2>Cargar una Duda</h2>
-            <form onSubmit={onSubmit}>
-                <div>
-                    <label htmlFor="topic">Tema:</label>
-                    <input type="text" name="topic" value={formData.topic} onChange={onChange} />
-                </div>
-                <div>
-                    <label htmlFor="question">Pregunta:</label>
-                    <textarea name="question" value={formData.question} onChange={onChange} />
-                </div>
-                <button type="submit">Enviar</button>
-            </form>
-            <SingleDoubt />
-        </div>
+        <>
+            <Grid>
+                <Card>
+                    <Text>Cargar una Duda</Text>
+                    <form onSubmit={onSubmit}>
+                        <div>
+                            <label htmlFor="topic">Tema:</label>
+                            <input type="text" name="topic" value={formData.topic} onChange={onChange} />
+                        </div>
+                        <div>
+                            <label htmlFor="question">Pregunta:</label>
+                            <textarea name="question" value={formData.question} onChange={onChange} />
+                        </div>
+                        <button type="submit">Enviar</button>
+                    </form>
+                    <SingleDoubt />
+                </Card>
+            </Grid>
+        </>
     );
 };
 
