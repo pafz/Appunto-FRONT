@@ -7,6 +7,7 @@ const token = JSON.parse(localStorage.getItem('token')) || null;
 const initialState = {
   user: user,
   token: token,
+  userDoubts: {},
 };
 
 export const authSlice = createSlice({
@@ -43,6 +44,9 @@ export const authSlice = createSlice({
       .addCase(register.rejected, (state, action) => {
         state.isError = true;
         state.message = action.payload.message;
+      })
+      .addCase(userAndDoubts.fulfilled, (state, action) => {
+        state.userDoubts = action.payload;
       });
   },
 });
@@ -72,6 +76,17 @@ export const logout = createAsyncThunk('auth/logout', async () => {
     console.error(error);
   }
 });
+
+export const userAndDoubts = createAsyncThunk(
+  'auth/userAndDoubts',
+  async () => {
+    try {
+      return await authService.userAndDoubts();
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
 
 export const { reset } = authSlice.actions;
 
