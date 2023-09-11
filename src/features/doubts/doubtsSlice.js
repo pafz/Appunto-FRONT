@@ -23,9 +23,9 @@ export const getAll = createAsyncThunk("doubts/getAll", async () => {
         console.error(error);
     }
 });
-export const getById = createAsyncThunk("doubts/getById", async (id) => {
+export const getById = createAsyncThunk("doubts/getById", async (_id) => {
     try {
-        return await doubtService.getById(id);
+        return await doubtService.getById(_id);
     } catch (error) {
         console.error(error);
     }
@@ -66,7 +66,7 @@ export const doubtsSlice = createSlice({
                 state.isLoading = true;
             })
             .addCase(getById.fulfilled, (state, action) => {
-                state.doubt = action.payload;
+                state.doubt = action.payload.doubt;
                 state.isLoading = false;
             })
             .addCase(getById.pending, (state) => {

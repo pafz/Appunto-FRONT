@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:3000";
+export const API_URL = "http://localhost:3000";
 
 const createDoubt = async (doubtData) => {
     const res = await axios.post(API_URL + "/doubts", doubtData);
@@ -15,6 +15,7 @@ const getAll = async () => {
 };
 
 const getById = async (_id) => {
+    const token = JSON.parse(localStorage.getItem("token"));
     const res = await axios.get(API_URL + "/doubts/" + _id, {
         headers: { Authorization: token },
     });

@@ -65,9 +65,9 @@ const Doubts = () => {
     return (
         <>
             <Grid templateColumns="1fr 2fr" gap={2}>
-                <Box as="aside" ml="">
+                <Box as="aside" ml="10%">
                     <Text>Cargar una Duda</Text>
-                    <Card variant="flushed" boxShadow="2xl" w="100%">
+                    <Card variant="flushed" boxShadow="2xl" w="80%" h="100%">
                         <form onSubmit={onSubmit}>
                             <Box p="7%">
                                 <FormLabel>Tópico *</FormLabel>
