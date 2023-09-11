@@ -9,6 +9,7 @@ const initialState = {
 
 export const createDoubt = createAsyncThunk("doubts/createDoubt", async (doubtData) => {
     try {
+        console.log(createDoubt);
         return await doubtService.createDoubt(doubtData);
     } catch (error) {
         console.error(error);
