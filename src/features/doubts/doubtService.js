@@ -31,7 +31,7 @@ const getByTopic = async (topic) => {
 
 const deleteDoubt = async (_id) => {
     const token = JSON.parse(localStorage.getItem("token"));
-    await axios.delete(API_URL + "/doubts/doubts" + _id, {
+    await axios.delete(API_URL + "/doubts/doubts/" + _id, {
         headers: {
             Authorization: token,
         },
