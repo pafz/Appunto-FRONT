@@ -5,14 +5,16 @@ import { getById } from "../../features/doubts/doubtsSlice";
 import { Spinner } from "@chakra-ui/react";
 
 const DoubtDetail = () => {
-    const { id } = useParams();
+    const { _id } = useParams();
 
     const { doubt, isLoading } = useSelector((state) => state.doubts);
+
+    console.log(doubt);
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getById(id));
+        dispatch(getById(_id));
     }, []);
 
     if (isLoading) {

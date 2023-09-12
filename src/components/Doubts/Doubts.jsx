@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useToast } from "@chakra-ui/react";
+import { Box, Button, Card, FormLabel, Grid, Input, Text, Textarea, useToast, VStack } from "@chakra-ui/react";
 import SingleDoubt from "../SingleDoubt/SingleDoubt";
 import { createDoubt } from "../../features/doubts/doubtsSlice";
+import { getAll } from "../../features/doubts/doubtsSlice";
+import "./Doubts.scss";
 
 const Doubts = () => {
     const [formData, setFormData] = useState({
         topic: "",
         question: "",
+        image: "",
     });
 
     const dispatch = useDispatch();
@@ -35,6 +38,10 @@ const Doubts = () => {
         }
     }, [message, isSuccess, isError, toast]);
 
+    useEffect(() => {
+        dispatch(getAll());
+    }, []);
+
     const onChange = (e) => {
         setFormData((prevState) => ({
             ...prevState,
@@ -56,21 +63,35 @@ const Doubts = () => {
     };
 
     return (
-        <div>
-            <h2>Cargar una Duda</h2>
-            <form onSubmit={onSubmit}>
-                <div>
-                    <label htmlFor="topic">Tema:</label>
-                    <input type="text" name="topic" value={formData.topic} onChange={onChange} />
-                </div>
-                <div>
-                    <label htmlFor="question">Pregunta:</label>
-                    <textarea name="question" value={formData.question} onChange={onChange} />
-                </div>
-                <button type="submit">Enviar</button>
-            </form>
-            <SingleDoubt />
-        </div>
+        <>
+            <Grid templateColumns="1fr 2fr" gap={2}>
+                <Box as="aside" ml="10%">
+                    <Text>Cargar una Duda</Text>
+                    <Card variant="flushed" boxShadow="2xl" w="80%" h="100%">
+                        <form onSubmit={onSubmit}>
+                            <Box p="7%">
+                                <FormLabel>Tópico *</FormLabel>
+                                <Input type="text" name="topic" value={formData.topic} onChange={onChange} />
+                            </Box>
+                            <Box p="7%">
+                                <FormLabel>Pregunta *</FormLabel>
+                                <Textarea name="question" value={formData.question} onChange={onChange} />
+                            </Box>
+
+                            <Box p="7%">
+                                <FormLabel>Imagen (opcional)</FormLabel>
+
+                                <Input type="file" name="image" value={formData.image} onChange={onChange} />
+                            </Box>
+                            <Button m="7%" colorScheme="teal" type="submit">
+                                Enviar
+                            </Button>
+                        </form>
+                    </Card>
+                </Box>
+                <SingleDoubt />
+            </Grid>
+        </>
     );
 };
 

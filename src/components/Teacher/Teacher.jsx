@@ -10,7 +10,7 @@ const Teacher = () => {
     }, []);
     return (
         <div>
-            Teacher
+            Teacher Profile
             <TeacherDoubts />
         </div>
     );

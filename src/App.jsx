@@ -10,8 +10,7 @@ import Doubts from './components/Doubts/Doubts';
 import TeacherZone from './guards/TeacherZone';
 import Teacher from './components/Teacher/Teacher';
 import PrivateZone from './guards/PrivateZone';
-//placeholder: Answers x2
-import Answers from './components/Answers/Answers';
+import DoubtDetail from './components/DoubtDetail/DoubtDetail';
 
 function App() {
   return (
@@ -31,7 +30,8 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/doubts" element={<Doubts />} />
-          <Route path="/answers" element={<Answers />} />
+          <Route path="/doubts/:_id" element={<DoubtDetail />} />
+
           <Route
             path="/teacher"
             element={
