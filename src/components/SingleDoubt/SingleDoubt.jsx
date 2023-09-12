@@ -14,7 +14,7 @@ const SingleDoubt = () => {
     }
 
     return (
-        <Grid templateColumns="repeat(5, 1fr)" gap="4" pl="8%" pr="8%">
+        <Grid templateColumns="repeat(5, 1fr)" gap="4" pl="10%" pr="10%">
             {doubts.map((doubt) => (
                 <Link to={"/doubts/" + doubt._id} key={doubt._id}>
                     <Card p="4" className="doubt-card">
