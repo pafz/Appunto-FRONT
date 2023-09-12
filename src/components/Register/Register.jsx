@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { register, reset } from '../../features/auth/authSlice';
-import { notification } from 'antd';
-//import useToast
+import { useToast } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
@@ -17,22 +16,30 @@ const Register = () => {
   const { message, isSuccess, isError } = useSelector(state => state.auth);
 
   const dispatch = useDispatch();
+  const toast = useToast();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (isSuccess) {
-      //copy toast from doubts
-      notification.success({
-        message: message,
+      toast({
+        title: 'Éxito',
+        description: message,
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
       });
     }
     if (isError) {
-      notification.error({
-        message: message,
+      toast({
+        title: 'Error',
+        description: message,
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
       });
     }
-    dispatch(reset());
-  }, [message, isSuccess, isError]);
+    // dispatch(reset()); NOT NECESARY???
+  }, [message, isSuccess, isError, toast]);
 
   const onChange = e => {
     setFormData(prevState => ({
@@ -42,6 +49,7 @@ const Register = () => {
   };
   const onSubmit = e => {
     e.preventDefault();
+    // HERE toast()??? .error
     if (password !== password2) {
       return notification.error({
         message: 'Error',
