@@ -11,7 +11,8 @@ export const createDoubt = createAsyncThunk(
   'doubts/createDoubt',
   async doubtData => {
     try {
-      return await doubtService.createDoubt(doubtData);
+        console.log(createDoubt);
+        return await doubtService.createDoubt(doubtData);
     } catch (error) {
       console.error(error);
     }
@@ -25,12 +26,12 @@ export const getAll = createAsyncThunk('doubts/getAll', async () => {
     console.error(error);
   }
 });
-export const getById = createAsyncThunk('doubts/getById', async id => {
-  try {
-    return await doubtService.getById(id);
-  } catch (error) {
-    console.error(error);
-  }
+export const getById = createAsyncThunk("doubts/getById", async (_id) => {
+    try {
+        return await doubtService.getById(_id);
+    } catch (error) {
+        console.error(error);
+    }
 });
 
 export const getByTopic = createAsyncThunk('doubts/getByTopic', async topic => {
@@ -50,32 +51,37 @@ export const deleteDoubt = createAsyncThunk('doubts/deleteDoubt', async id => {
 });
 
 export const doubtsSlice = createSlice({
-  name: 'doubts',
-  initialState,
-  reducers: {},
-  extraReducers: builder => {
-    builder
-      .addCase(getAll.fulfilled, (state, action) => {
-        state.doubts = action.payload.doubts;
-        state.isLoading = false;
-      })
-      .addCase(getAll.pending, state => {
-        state.isLoading = true;
-      })
-      .addCase(getById.fulfilled, (state, action) => {
-        state.doubt = action.payload;
-        state.isLoading = false;
-      })
-      .addCase(getById.pending, state => {
-        state.isLoading = true;
-      })
-      .addCase(getByTopic.fulfilled, (state, action) => {
-        state.doubts = action.payload;
-      })
-      .addCase(deleteDoubt.fulfilled, (state, action) => {
-        state.doubts = state.doubts.filter(doubt => doubt.id != action.payload);
-      });
-  },
+    name: "doubts",
+    initialState,
+    reducers: {},
+    extraReducers: (builder) => {
+        builder
+
+            .addCase(createDoubt.fulfilled, (state, action) => {
+                state.doubts = action.payload.doubts;
+                state.isLoading = false;
+            })
+            .addCase(getAll.fulfilled, (state, action) => {
+                state.doubts = action.payload.doubts;
+                state.isLoading = false;
+            })
+            .addCase(getAll.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(getById.fulfilled, (state, action) => {
+                state.doubt = action.payload.doubt;
+                state.isLoading = false;
+            })
+            .addCase(getById.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(getByTopic.fulfilled, (state, action) => {
+                state.doubts = action.payload;
+            })
+            .addCase(deleteDoubt.fulfilled, (state, action) => {
+                state.doubts = state.doubts.filter((doubt) => doubt.id != action.payload);
+            });
+    },
 });
 
 export default doubtsSlice.reducer;
