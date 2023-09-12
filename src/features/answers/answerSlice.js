@@ -27,6 +27,17 @@ export const likeAnswer = createAsyncThunk(
   }
 );
 
+export const dislikeAnswer = createAsyncThunk(
+  'answer/dislikeAnswer',
+  async answerId => {
+    try {
+      return await answerService.dislikeAnswer(answerId);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
+
 export const deleteAnswer = createAsyncThunk(
   'answer/deleteAnswer',
   async answerId => {

@@ -27,6 +27,19 @@ const likeAnswer = async answerId => {
   return answerId;
 };
 
+const dislikeAnswer = async answerId => {
+  const token = JSON.parse(localStorage.getItem('token'));
+  const res = await axios.post(
+    API_URL + '/answers/answers/' + answerId + '/dislike',
+    {
+      headers: {
+        Authorization: token,
+      },
+    }
+  );
+  return answerId;
+};
+
 const deleteAnswer = async answerId => {
   const token = JSON.parse(localStorage.getItem('token'));
   await axios.delete(API_URL + '/delete/' + answerId, {
@@ -40,6 +53,7 @@ const deleteAnswer = async answerId => {
 const answerService = {
   createAnswer,
   likeAnswer,
+  dislikeAnswer,
   deleteAnswer,
 };
 
