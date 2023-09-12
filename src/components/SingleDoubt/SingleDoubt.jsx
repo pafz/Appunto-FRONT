@@ -7,29 +7,34 @@ import "./SingleDoubt.scss";
 
 const SingleDoubt = () => {
     const { doubts, isLoading } = useSelector((state) => state.doubts);
-    const { user } = useSelector((state) => state.auth); // Obtener información del usuario desde el estado de autenticación
+    const { user } = useSelector((state) => state.auth);
 
     if (isLoading) {
         return <Spinner />;
     }
 
     return (
-        <Grid templateColumns="repeat(4, 1fr)" gap="4">
+        <Grid templateColumns="repeat(5, 1fr)" gap="4" pl="8%" pr="8%">
             {doubts.map((doubt) => (
                 <Link to={"/doubts/" + doubt._id} key={doubt._id}>
                     <Card p="4" className="doubt-card">
-                        {/* Mostrar información del usuario */}
                         {user && (
                             <>
-                                <Text>{user.name}</Text>
-                                <Text>{user.role}</Text>
-                                {user.image && <Image src={getImageURL(user.image)} alt={user.name} h="50px" w="50px" objectFit="cover" borderRadius="full" />}
+                                <Box pb="6%">
+                                    <Text as="b" fontSize="1.1em">
+                                        {user.name}
+                                    </Text>
+                                    <Text fontSize="0.8em" color="gray.500">
+                                        {user.role.toUpperCase()}
+                                    </Text>
+                                    {user.image && <Image src={getImageURL(user.image)} alt={user.name} h="50px" w="50px" objectFit="cover" borderRadius="full" />}
+                                </Box>
                             </>
                         )}
                         <Box className="image-container">
                             <Image src={getImageURL(doubt.imagePath)} h="200px" w="100%" objectFit="cover" borderRadius="8px" className="image-zoom" />
                         </Box>
-                        <Text fontSize="xl" mt="2">
+                        <Text fontSize="xl" mt="2" pt="3%" pb="3%">
                             <Tag colorScheme="teal">{doubt.topic ? doubt.topic.toUpperCase() : ""}</Tag>
                         </Text>
                         <Text>{doubt.question}</Text>
