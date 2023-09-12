@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { register, reset } from '../../features/auth/authSlice';
-import { notification } from 'antd';
 import { useToast } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 
