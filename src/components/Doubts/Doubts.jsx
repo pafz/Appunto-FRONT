@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Box, Button, Card, FormLabel, Grid, Input, Text, Textarea, useToast, VStack } from "@chakra-ui/react";
+import { Box, Button, Card, FormLabel, Grid, Input, Text, Textarea, useToast, Drawer, DrawerBody, DrawerOverlay, DrawerContent, DrawerCloseButton } from "@chakra-ui/react";
 import SingleDoubt from "../SingleDoubt/SingleDoubt";
 import { createDoubt } from "../../features/doubts/doubtsSlice";
 import { getAll } from "../../features/doubts/doubtsSlice";
@@ -51,46 +51,55 @@ const Doubts = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-
         dispatch(
             createDoubt({
                 topic: formData.topic,
                 question: formData.question,
             })
         );
-
         setFormData({ topic: "", question: "" });
     };
 
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
     return (
         <>
-            <Grid templateColumns="1fr 2fr" gap={2}>
-                <Box as="aside" ml="10%">
-                    <Text>Cargar una Duda</Text>
-                    <Card variant="flushed" boxShadow="2xl" w="80%" h="100%">
-                        <form onSubmit={onSubmit}>
-                            <Box p="7%">
-                                <FormLabel>Tópico *</FormLabel>
-                                <Input type="text" name="topic" value={formData.topic} onChange={onChange} />
-                            </Box>
-                            <Box p="7%">
-                                <FormLabel>Pregunta *</FormLabel>
-                                <Textarea name="question" value={formData.question} onChange={onChange} />
-                            </Box>
+            <Box as="aside" ml="8%" mb="5%" mt="4%">
+                <Button colorScheme="teal" onClick={() => setIsDrawerOpen(true)}>
+                    Sube tu duda!
+                </Button>
+            </Box>
+            <SingleDoubt />
+            <Drawer isOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)} size="md">
+                <DrawerOverlay>
+                    <DrawerContent>
+                        <DrawerCloseButton />
+                        <Text p="10%"> Aquí puedes subir tu duda. Adjuntar una imagen puede ayudar a tus compis a entender mejor tu consulta:</Text>
+                        <DrawerBody>
+                            <Box>
+                                <form onSubmit={onSubmit}>
+                                    <Box p="4%">
+                                        <FormLabel>Tópico *</FormLabel>
+                                        <Input type="text" name="topic" placeholder="Sobre qué tema vas a preguntar?" value={formData.topic} onChange={onChange} />
+                                    </Box>
+                                    <Box p="4%">
+                                        <FormLabel>Pregunta *</FormLabel>
+                                        <Textarea name="question" placeholder="Escribe aquí tu duda" value={formData.question} onChange={onChange} />
+                                    </Box>
 
-                            <Box p="7%">
-                                <FormLabel>Imagen (opcional)</FormLabel>
-
-                                <Input type="file" name="image" value={formData.image} onChange={onChange} />
+                                    <Box p="4%">
+                                        <FormLabel>Imagen (opcional)</FormLabel>
+                                        <Input type="file" name="image" value={formData.image} onChange={onChange} />
+                                    </Box>
+                                    <Button m="4%" w="92%" colorScheme="teal" type="submit">
+                                        Enviar
+                                    </Button>
+                                </form>
                             </Box>
-                            <Button m="7%" colorScheme="teal" type="submit">
-                                Enviar
-                            </Button>
-                        </form>
-                    </Card>
-                </Box>
-                <SingleDoubt />
-            </Grid>
+                        </DrawerBody>
+                    </DrawerContent>
+                </DrawerOverlay>
+            </Drawer>
         </>
     );
 };
