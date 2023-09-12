@@ -85,4 +85,3 @@ export const doubtsSlice = createSlice({
 });
 
 export default doubtsSlice.reducer;
-p;
