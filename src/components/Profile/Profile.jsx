@@ -64,11 +64,8 @@ const Profile = () => {
               className="image-zoom"
             />
 
-            <Text>{userDoubt.question}</Text>
+            <Text p="5">{userDoubt.question}</Text>
           </CardBody>
-          <CardFooter>
-            <Button>Ver duda</Button>
-          </CardFooter>
         </Card>
       </Box>
     );
