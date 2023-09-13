@@ -6,6 +6,7 @@ const createDoubt = async (doubtData) => {
     const res = await axios.post(API_URL + "/doubts", doubtData);
     return res.data;
 };
+
 const getAll = async () => {
     const token = JSON.parse(localStorage.getItem("token"));
     const res = await axios.get(API_URL + "/doubts/all/doubts", {
@@ -39,12 +40,18 @@ const deleteDoubt = async (_id) => {
     return id;
 };
 
+const createAnswer = async (answerData) => {
+    const res = await axios.post(API_URL + "/answers", answerData);
+    return res.data;
+};
+
 const doubtService = {
     createDoubt,
     getAll,
     getById,
     getByTopic,
     deleteDoubt,
+    createAnswer,
 };
 
 export default doubtService;
