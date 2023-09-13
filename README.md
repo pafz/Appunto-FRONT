@@ -191,11 +191,11 @@ En el <i>index.js</i>:<br>
 <views id="preview">
 <h1>5. <strong>Vista previa</strong></h1>
 
-<p>ER Diagram of Candy DB in MySQL Workbench</p>
+<p>Home, Register, Profile</p>
 
-![foto](./)
-![gif](./)
-![gif](./)
+![foto](./src/assets/home.png)
+![foto](./src/assets/register.png)
+![foto](./src/assets/profile.png)
 </views>
 
 <!-- LINKS -->
@@ -230,7 +230,6 @@ Patricia González
 
 & Patricia Fernández
 
-<a href = "mailto:paferza@gmail.com"><img src="https://img.shields.io/badge/-Gmail-%23333?style=for-the-badge&logo=gmail&logoColor=white" target="_blank"></a>
 <a href="https://www.linkedin.com/in/patricia-fernandez-zamanillo/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a>
 
 </p>
