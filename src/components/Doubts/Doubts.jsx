@@ -64,7 +64,7 @@ const Doubts = () => {
 
     return (
         <>
-            <Box as="aside" ml="8%" mb="5%" mt="4%">
+            <Box as="aside" ml="10%" mb="5%" mt="4%">
                 <Button colorScheme="teal" onClick={() => setIsDrawerOpen(true)}>
                     Sube tu duda!
                 </Button>

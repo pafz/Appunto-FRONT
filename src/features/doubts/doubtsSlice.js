@@ -19,6 +19,18 @@ export const createDoubt = createAsyncThunk(
   }
 );
 
+export const createAnswer = createAsyncThunk(
+  'answer/createAnswer',
+  async answerData => {
+    try {
+      console.log(answerData);
+      return await doubtService.createAnswer(answerData);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
+
 export const getAll = createAsyncThunk('doubts/getAll', async () => {
   try {
     return await doubtService.getAll();
