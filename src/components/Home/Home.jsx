@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Home = () => {
     return (
         <Box>
-            <Grid templateColumns="repeat(2,1fr)" gap="4" pl="10%" pr="10%" pb="3%" mt="3%">
+            <Grid templateColumns="repeat(2,1fr)" gap="4" pl="10%" pr="10%" pb="6%" mt="3%">
                 <Box mt="20%">
                     <Text as="b" fontSize="3.3em">
                         Pregunta.

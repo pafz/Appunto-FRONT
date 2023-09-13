@@ -8,6 +8,7 @@ import "./SingleDoubt.scss";
 const SingleDoubt = () => {
     const { doubts, isLoading } = useSelector((state) => state.doubts);
     const { user } = useSelector((state) => state.auth);
+    console.log(doubts);
 
     if (isLoading) {
         return <Spinner />;
