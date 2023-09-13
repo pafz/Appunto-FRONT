@@ -47,6 +47,9 @@ export const authSlice = createSlice({
       })
       .addCase(userAndDoubts.fulfilled, (state, action) => {
         state.userDoubts = action.payload;
+      })
+      .addCase(changeAvatar.fulfilled, (state, action) => {
+        state.user = action.payload.user;
       });
   },
 });
@@ -58,6 +61,17 @@ export const register = createAsyncThunk('auth/register', async user => {
     console.error(error);
   }
 });
+
+export const changeAvatar = createAsyncThunk(
+  'auth/changeAvatar',
+  async avatar => {
+    try {
+      return await authService.uploadAvatar(avatar);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
 
 export const login = createAsyncThunk('auth/login', async user => {
   try {

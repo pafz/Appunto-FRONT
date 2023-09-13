@@ -11,38 +11,38 @@ import TeacherZone from './guards/TeacherZone';
 import Teacher from './components/Teacher/Teacher';
 import PrivateZone from './guards/PrivateZone';
 import DoubtDetail from './components/DoubtDetail/DoubtDetail';
-import Search from './components/Search/Search';
+import { Box } from '@chakra-ui/react';
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route
-            path="/profile"
-            element={
-              <PrivateZone>
-                <Profile />
-              </PrivateZone>
-            }
-          />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/doubts" element={<Doubts />} />
-          <Route path="/doubts/:_id" element={<DoubtDetail />} />
-          <Route path="/search/:doubtName" element={<Search />} />
-
-          <Route
-            path="/teacher"
-            element={
-              <TeacherZone>
-                <Teacher />
-              </TeacherZone>
-            }
-          />
-        </Routes>
+        <Box p="2em">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route
+              path="/profile"
+              element={
+                <PrivateZone>
+                  <Profile />
+                </PrivateZone>
+              }
+            />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/doubts" element={<Doubts />} />
+            <Route path="/doubts/:_id" element={<DoubtDetail />} />
+            <Route
+              path="/teacher"
+              element={
+                <TeacherZone>
+                  <Teacher />
+                </TeacherZone>
+              }
+            />
+          </Routes>
+        </Box>
       </BrowserRouter>
     </div>
   );
