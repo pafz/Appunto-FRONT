@@ -50,6 +50,17 @@ export const deleteDoubt = createAsyncThunk('doubts/deleteDoubt', async id => {
   }
 });
 
+export const getDoubtByName = createAsyncThunk(
+  'doubts/getDoubtByName',
+  async doubttName => {
+    try {
+      return await doubtService.getDoubtByName(doubttName);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
+
 export const doubtsSlice = createSlice({
   name: 'doubts',
   initialState,
@@ -80,6 +91,9 @@ export const doubtsSlice = createSlice({
       })
       .addCase(deleteDoubt.fulfilled, (state, action) => {
         state.doubts = state.doubts.filter(doubt => doubt.id != action.payload);
+      })
+      .addCase(getDoubtByName.fulfilled, (state, action) => {
+        state.doubts = action.payload;
       });
   },
 });

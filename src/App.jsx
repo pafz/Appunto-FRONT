@@ -11,6 +11,7 @@ import TeacherZone from './guards/TeacherZone';
 import Teacher from './components/Teacher/Teacher';
 import PrivateZone from './guards/PrivateZone';
 import DoubtDetail from './components/DoubtDetail/DoubtDetail';
+import Search from './components/Search/Search';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/doubts" element={<Doubts />} />
           <Route path="/doubts/:_id" element={<DoubtDetail />} />
+          <Route path="/search/:doubtName" element={<Search />} />
 
           <Route
             path="/teacher"
