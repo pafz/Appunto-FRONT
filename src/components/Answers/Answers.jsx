@@ -1,21 +1,20 @@
-import React, { useState } from "react";
-import { Button, Textarea } from "@chakra-ui/react";
+import React, { useState } from 'react';
+import { Button, Textarea } from '@chakra-ui/react';
 
 const Answers = ({ answers }) => {
-    console.log(answers);
-    return (
-        <div>
-            {answers.map((answer) => {
-                const isLiked = answer.likes.includes(user?._id);
+  return (
+    <div>
+      {answers.map(answer => {
+        const isLiked = answer.likes.includes(user?._id);
 
-                return (
-                    <Box key={answer._id}>
-                        <p>{answer.reply}</p>
-                    </Box>
-                );
-            })}
-        </div>
-    );
+        return (
+          <Box key={answer._id}>
+            <p>{answer.reply}</p>
+          </Box>
+        );
+      })}
+    </div>
+  );
 };
 
 export default Answers;

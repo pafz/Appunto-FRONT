@@ -1,3 +1,4 @@
+
 import { Spinner, Box, Image, Text, Tag, Grid, Card } from "@chakra-ui/react";
 import React from "react";
 import { useSelector } from "react-redux";
@@ -6,15 +7,14 @@ import getImageURL from "../../app/utils";
 import { motion } from "framer-motion";
 import "./SingleDoubt.scss";
 
+
 const SingleDoubt = () => {
-    const { doubts, isLoading } = useSelector((state) => state.doubts);
-    const { user } = useSelector((state) => state.auth);
-    console.log(doubts);
+  const { doubts, isLoading } = useSelector(state => state.doubts);
+  const { user } = useSelector(state => state.auth);
 
-    if (isLoading) {
-        return <Spinner />;
-    }
-
+  if (isLoading) {
+    return <Spinner />;
+  }
     return (
         <Grid templateColumns="repeat(5, 1fr)" gap="4" pl="10%" pr="10%">
             {doubts.map((doubt) => (
@@ -47,6 +47,7 @@ const SingleDoubt = () => {
             ))}
         </Grid>
     );
+
 };
 
 export default SingleDoubt;

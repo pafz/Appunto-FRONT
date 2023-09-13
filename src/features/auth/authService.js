@@ -7,6 +7,19 @@ const register = async userData => {
   return res.data;
 };
 
+const uploadAvatar = async avatar => {
+  const token = JSON.parse(localStorage.getItem('token'));
+  const res = await axios.post(API_URL + '/users/avatar', avatar, {
+    headers: {
+      Authorization: token,
+    },
+  });
+  if (res.data) {
+    localStorage.setItem('user', JSON.stringify(res.data.user));
+  }
+  return res.data;
+};
+
 const login = async userData => {
   const res = await axios.post(API_URL + '/users/login', userData);
   if (res.data) {
@@ -36,6 +49,7 @@ const userAndDoubts = async () => {
       Authorization: token,
     },
   });
+
   return res.data;
 };
 
@@ -44,6 +58,7 @@ const authService = {
   login,
   logout,
   userAndDoubts,
+  uploadAvatar,
 };
 
 export default authService;

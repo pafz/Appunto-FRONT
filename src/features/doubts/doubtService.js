@@ -31,7 +31,10 @@ const getByTopic = async topic => {
 };
 
 const getDoubtByName = async doubtTitle => {
-  const res = await axios.get(API_URL + '/doubts/title/' + doubtTitle);
+  const token = JSON.parse(localStorage.getItem('token'));
+  const res = await axios.get(API_URL + '/doubts/search/' + doubtTitle, {
+    headers: { Authorization: token },
+  });
   return res.data;
 };
 
