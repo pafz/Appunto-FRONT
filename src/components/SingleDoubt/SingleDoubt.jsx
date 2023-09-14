@@ -31,7 +31,7 @@ const SingleDoubt = () => {
                                     <Box>{user.avatar && <Image src={getImageURL(user.avatar)} alt={user.name} h="50px" w="50px" objectFit="cover" borderRadius="full" />}</Box>
                                     <Box>
                                         <Text as="b" fontSize="1.1em">
-                                            {user.name}
+                                            {doubt._idUser.name}
                                         </Text>
                                         <Text fontSize="0.8em" color="gray.500">
                                             {user.role.toUpperCase()}
