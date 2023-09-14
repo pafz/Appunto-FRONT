@@ -14,12 +14,11 @@ const Home = () => {
                     </Text>
                     <Text w="50%">Appunto ofrece una forma eficaz y potente de gestionar las dudas de los alumnos.</Text>{" "}
                     <Link to="/login">
-                        <motion.a whileHover={{ scale: 1.2 }} onHoverStart={(e) => {}} onHoverEnd={(e) => {}} />
                         <Button mt="8%" colorScheme="teal">
                             Empezar
                         </Button>
                     </Link>
-                </Box>{" "}
+                </Box>
                 <Link to="/doubts">
                     <motion.div whileHover={{ scale: 1.1, transition: { duration: 0.2 } }}>
                         <Box>

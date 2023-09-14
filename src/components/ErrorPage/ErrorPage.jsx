@@ -6,10 +6,11 @@ const ErrorPage = () => {
     return (
         <Box pl="30%">
             <Image w="60%" src="src/assets/404.svg" />
-
-            <Button colorScheme="teal" ml="20%">
-                <Link to="/">Volver al Inicio</Link>
-            </Button>
+            <Link to="/">
+                <Button colorScheme="teal" ml="20%">
+                    Volver al Inicio
+                </Button>
+            </Link>
         </Box>
     );
 };
