@@ -1,35 +1,52 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from "react";
+import "./App.css";
+import Login from "./components/Login/Login";
+import Register from "./components/Register/Register";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./components/Home/Home";
+import Header from "./components/Header/Header";
+import Profile from "./components/Profile/Profile";
+import Doubts from "./components/Doubts/Doubts";
+import TeacherZone from "./guards/TeacherZone";
+import Teacher from "./components/Teacher/Teacher";
+import PrivateZone from "./guards/PrivateZone";
+import DoubtDetail from "./components/DoubtDetail/DoubtDetail";
+import ErrorPage from "./components/ErrorPage/ErrorPage";
+import { Box } from "@chakra-ui/react";
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    return (
+        <div className="App">
+            <BrowserRouter>
+                <Header />
+                <Box p="2em">
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route
+                            path="/profile"
+                            element={
+                                <PrivateZone>
+                                    <Profile />
+                                </PrivateZone>
+                            }
+                        />
+                        <Route path="/register" element={<Register />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/doubts" element={<Doubts />} />
+                        <Route path="/doubts/:_id" element={<DoubtDetail />} />
+                        <Route
+                            path="/teacher"
+                            element={
+                                <TeacherZone>
+                                    <Teacher />
+                                </TeacherZone>
+                            }
+                        />
+                        <Route path="*" element={<ErrorPage />} />
+                    </Routes>
+                </Box>
+            </BrowserRouter>
+        </div>
+    );
 }
-
-export default App
+export default App;
