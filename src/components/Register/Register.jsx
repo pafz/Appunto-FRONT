@@ -39,7 +39,6 @@ const Register = () => {
                 isClosable: true,
             });
         }
-        // dispatch(reset()); NOT NECESARY???
     }, [message, isSuccess, isError, toast]);
 
     const onChange = (e) => {
@@ -50,7 +49,7 @@ const Register = () => {
     };
     const onSubmit = (e) => {
         e.preventDefault();
-        // HERE toast()??? .error
+
         if (password !== password2) {
             return notification.error({
                 message: "Error",

@@ -1,5 +1,4 @@
-
-import { Spinner, Box, Image, Text, Tag, Grid, Card } from "@chakra-ui/react";
+import { Spinner, Box, Image, Text, Tag, Grid, Card, Divider, HStack } from "@chakra-ui/react";
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -7,14 +6,14 @@ import getImageURL from "../../app/utils";
 import { motion } from "framer-motion";
 import "./SingleDoubt.scss";
 
-
 const SingleDoubt = () => {
-  const { doubts, isLoading } = useSelector(state => state.doubts);
-  const { user } = useSelector(state => state.auth);
+    const { doubts, isLoading } = useSelector((state) => state.doubts);
+    const { user } = useSelector((state) => state.auth);
 
-  if (isLoading) {
-    return <Spinner />;
-  }
+    if (isLoading) {
+        return <Spinner />;
+    }
+
     return (
         <Grid templateColumns="repeat(5, 1fr)" gap="4" pl="10%" pr="10%">
             {doubts.map((doubt) => (
@@ -23,15 +22,17 @@ const SingleDoubt = () => {
                         <Card p="4" className="doubt-card">
                             {user && (
                                 <>
-                                    <Box pb="6%">
-                                        <Text as="b" fontSize="1.1em">
-                                            {user.name}
-                                        </Text>
-                                        <Text fontSize="0.8em" color="gray.500">
-                                            {user.role.toUpperCase()}
-                                        </Text>
-                                        {user.image && <Image src={getImageURL(user.image)} alt={user.name} h="50px" w="50px" objectFit="cover" borderRadius="full" />}
-                                    </Box>
+                                    <HStack pb="6%">
+                                        <Box>{user.avatar && <Image src={getImageURL(user.avatar)} alt={user.name} h="50px" w="50px" objectFit="cover" borderRadius="full" />}</Box>
+                                        <Box>
+                                            <Text as="b" fontSize="1.1em">
+                                                {user.name}
+                                            </Text>
+                                            <Text fontSize="0.8em" color="gray.500">
+                                                {user.role.toUpperCase()}
+                                            </Text>
+                                        </Box>
+                                    </HStack>
                                 </>
                             )}
                             <Box className="image-container">
@@ -41,13 +42,31 @@ const SingleDoubt = () => {
                                 <Tag colorScheme="teal">{doubt.topic ? doubt.topic.toUpperCase() : ""}</Tag>
                             </Text>
                             <Text>{doubt.question}</Text>
+                            <Divider w="90%" p="5%" color="teal.500" alignSelf="center" />
+                            {doubt._idAnswer.map((answer) => (
+                                <Box mt="2vh" key={answer._id}>
+                                    <HStack>
+                                        <Box>{user.avatar && <Image src={getImageURL(user.avatar)} alt={user.name} h="50px" w="50px" objectFit="cover" borderRadius="full" />}</Box>
+                                        <Box>
+                                            <Text as="b" fontSize="1.1em">
+                                                {answer._idUser.name}
+                                            </Text>
+                                            <Text fontSize="0.8em" color="gray.500">
+                                                {answer._idUser.role.toUpperCase()}
+                                            </Text>
+                                        </Box>
+                                    </HStack>
+                                    <Text bgColor="#ECF9F9" rounded="md" pt="4%" pb="4%" pl="2%">
+                                        {answer.reply}
+                                    </Text>
+                                </Box>
+                            ))}
                         </Card>
                     </motion.div>
                 </Link>
             ))}
         </Grid>
     );
-
 };
 
 export default SingleDoubt;

@@ -1,18 +1,13 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { logout } from "../../features/auth/authSlice";
-import { Box, Button, Flex, Grid, GridItem, HStack, Image, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, HStack, Image, Text } from "@chakra-ui/react";
 
 const Header = () => {
-    // const navigate = useNavigate();
     const dispatch = useDispatch();
     const { user } = useSelector((state) => state.auth);
-    // const onLogout = e => {
-    //   e.preventDefault();
-    //   dispatch(logout);
-    //   navigate('/login');
-    // };
+
     return (
         <Flex alignItems="center" justifyContent="space-between">
             <Box w="40vh">
