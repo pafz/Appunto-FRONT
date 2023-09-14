@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createDoubt } from "../../features/doubts/doubtsSlice";
-import { Box, Button, FormLabel, Input, Text, Textarea, Drawer, DrawerBody, DrawerOverlay, DrawerContent, DrawerCloseButton } from "@chakra-ui/react";
+import { Box, Button, FormLabel, Input, Text, Textarea, Drawer, DrawerBody, DrawerOverlay, DrawerContent, DrawerCloseButton, Image } from "@chakra-ui/react";
 
 const DoubtUploader = () => {
     const [formData, setFormData] = useState({
@@ -75,6 +75,7 @@ const DoubtUploader = () => {
                                         Enviar
                                     </Button>
                                 </form>
+                                <Image src="src/assets/question.png" />
                             </Box>
                         </DrawerBody>
                     </DrawerContent>

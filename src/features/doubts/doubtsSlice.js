@@ -106,13 +106,6 @@ export const doubtsSlice = createSlice({
                     state.doubts = action.payload.doubts;
                 }
             });
-        //   .addCase(getAnswerById.fulfilled, (state, action) => {
-        //     state.doubt = action.payload.doubt;
-        //     state.isLoading = false;
-        // })
-        // .addCase(getAnswerById.pending, (state) => {
-        //     state.isLoading = true;
-        // })
     },
 });
 

@@ -1,120 +1,113 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { userAndDoubts, changeAvatar } from '../../features/auth/authSlice';
-import getImageURL from '../../app/utils';
-import {
-  Box,
-  Card,
-  CardBody,
-  Image,
-  Stack,
-  Spinner,
-  Heading,
-  Text,
-  Divider,
-  CardFooter,
-  Button,
-  FormLabel,
-  Input,
-  SimpleGrid,
-  CardHeader,
-  Flex,
-} from '@chakra-ui/react';
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { userAndDoubts, changeAvatar } from "../../features/auth/authSlice";
+import getImageURL from "../../app/utils";
+import { Box, Card, CardBody, Image, Stack, Spinner, Tag, Text, Divider, Button, FormLabel, Input, SimpleGrid, CardHeader, HStack } from "@chakra-ui/react";
 
 const Profile = () => {
-  const { user, isLoading, userDoubts } = useSelector(state => state.auth);
-  const [image, setImage] = useState();
+    const { user, isLoading, userDoubts } = useSelector((state) => state.auth);
+    const [image, setImage] = useState();
+    const [clickCount, setClickCount] = useState(0);
 
-  const dispatch = useDispatch();
+    console.log(user);
 
-  useEffect(() => {
-    dispatch(userAndDoubts());
-  }, []);
+    const dispatch = useDispatch();
 
-  const onChange = e => {
-    setImage(e.target.files[0]);
-  };
+    useEffect(() => {
+        dispatch(userAndDoubts());
+    }, []);
 
-  const onSubmit = e => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append('avatar', image);
-    dispatch(changeAvatar(formData));
-    e.target.value = '';
-  };
+    const onChange = (e) => {
+        setImage(e.target.files[0]);
+    };
 
-  if (isLoading) {
-    return <Spinner />;
-  }
+    const onSubmit = (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append("avatar", image);
+        dispatch(changeAvatar(formData));
+        e.target.value = "";
+    };
+    const handleIncrementClick = () => {
+        setClickCount((prevCount) => prevCount + 1);
+    };
 
-  const profileDoubts = userDoubts._idDoubt?.map(userDoubt => {
-    return (
-      <Box className="image-container" key={userDoubt._id}>
-        <Card>
-          <CardHeader>
-            <Heading size="md"> {userDoubt.topic}</Heading>
-          </CardHeader>
-          <CardBody>
-            <Image
-              src={getImageURL(userDoubt.imagePath)}
-              h="200px"
-              w="100%"
-              objectFit="cover"
-              borderRadius="8px"
-              className="image-zoom"
-            />
+    if (isLoading) {
+        return <Spinner />;
+    }
 
-            <Text p="5">{userDoubt.question}</Text>
-          </CardBody>
-        </Card>
-      </Box>
-    );
-  });
+    const profileDoubts = userDoubts._idDoubt?.map((userDoubt) => {
+        return (
+            <Box key={userDoubt._id}>
+                <Card w="80%">
+                    <CardHeader>
+                        <Text fontSize="xl" mt="2" pt="3%">
+                            <Tag colorScheme="teal">{userDoubt.topic ? userDoubt.topic.toUpperCase() : ""}</Tag>
+                        </Text>
+                    </CardHeader>
+                    <CardBody>
+                        <Image src={getImageURL(userDoubt.imagePath)} h="200px" w="100%" objectFit="cover" borderRadius="8px" />
 
-  return (
-    <>
-      <Flex align="stretch" gap="3em" direction="row" justify="center">
-        <Box maxW="sm">
-          <Image
-            src={getImageURL(user.avatar)}
-            alt="users avatar"
-            borderRadius="lg"
-          />
-        </Box>
-        <Box maxW="sm">
-          <Stack mt="6" spacing="3">
-            <Text color="teal" fontSize="2xl">
-              nombre: {user.name}
-            </Text>
-            <Text color="teal" fontSize="2xl">
-              email: {user.email}
-            </Text>
-            <Text color="teal" fontSize="2xl">
-              edad: {user.age}
-            </Text>
-          </Stack>
-          <form onSubmit={onSubmit}>
-            <Box p="4%">
-              <FormLabel color={'GrayText'}>Avatar (opcional)</FormLabel>
-              <Input type="file" name="image" onChange={onChange} />
+                        <Text as="b" pt="5">
+                            {userDoubt.question}
+                        </Text>
+                    </CardBody>
+                </Card>
             </Box>
-            <Button variant="solid" colorScheme="teal" type="submit">
-              Subir avatar
-            </Button>
-          </form>
-        </Box>
-      </Flex>
-      <div>
-        <Text fontSize="7xl" color="teal" align="center" m="0.7em">
-          Dudas:
-        </Text>
-        <SimpleGrid columns="5" spacingX="40px" spacingY="20px">
-          {profileDoubts}
-        </SimpleGrid>
-      </div>
-      <p></p>
-    </>
-  );
+        );
+    });
+
+    return (
+        <>
+            <HStack>
+                <Card w="40%" h="80vh" boxShadow="2xl" display="flex" alignItems="center" justifyContent="center">
+                    <Box maxW="sm">
+                        <Image src={getImageURL(user.avatar)} alt="users avatar" borderRadius="50%" w="200px" />
+                    </Box>
+                    <Box maxW="sm">
+                        <Stack mt="6" spacing="3">
+                            <Text textAlign="center" color="teal" fontSize="2xl">
+                                {user.name}
+                            </Text>
+                            <Text textAlign="center" fontSize="0.9em" color="gray.500">
+                                {user.role.toUpperCase()}
+                            </Text>
+                            <Text textAlign="center" color="teal" fontSize="1.1em">
+                                {user.email}
+                            </Text>
+                        </Stack>
+                        <Divider w="90%" p="5%" color="teal.500" alignSelf="center" />
+                        <Box mt="5%">
+                            <form onSubmit={onSubmit}>
+                                <Box p="4%">
+                                    <FormLabel textAlign="center" color={"GrayText"}>
+                                        Avatar (opcional)
+                                    </FormLabel>
+                                    <Input type="file" name="image" onChange={onChange} />
+                                </Box>
+                                <Button ml="30%" mt="5%" variant="solid" colorScheme="teal" type="submit">
+                                    Sube tu avatar
+                                </Button>
+                            </form>
+                        </Box>
+                    </Box>
+                    <Box mt={9} p={4} align="center">
+                        <Text fontSize="lg" fontWeight="bold">
+                            Puntos: {clickCount}
+                        </Text>
+                        <Image src="src/assets/logoAppunto.png" alt="Logo de Appunto" onClick={handleIncrementClick} style={{ cursor: "pointer" }} w="50px" />
+                    </Box>
+                </Card>
+
+                <Box pl="5%">
+                    <Text fontSize="1.2em" color="teal" m="0.7em">
+                        Dudas:
+                    </Text>
+                    <SimpleGrid columns="5">{profileDoubts}</SimpleGrid>
+                </Box>
+            </HStack>
+        </>
+    );
 };
 
 export default Profile;
